@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+
+body {
+  margin: 0;
+  font-family: Poppins,serif;
+  background-color: #fff;
+  color:#201F23
+}
+
+html {
+  scroll-behavior: smooth;
+}
+.fade-enter {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+.fade-enter-active {
+  opacity: 1;
+}
+.fade {
+  transition: opacity 0.6s ease-in-out;
+}
+
