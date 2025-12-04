@@ -2,7 +2,7 @@ import { Facebook, Twitter, Instagram, Github } from "lucide-react"
 import Link from "next/link"
 
 const footerLinks = [
-    { label: "About", href: "#" },
+    { label: "About", href: "#about" },
     { label: "Blog", href: "#" },
     { label: "Jobs", href: "#" },
     { label: "Press", href: "#" },
