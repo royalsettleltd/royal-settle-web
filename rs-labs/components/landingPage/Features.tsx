@@ -21,9 +21,9 @@ const Features = () => {
                            className={'object-cover'}/>
                 </div>
                     <Image src={'/deskOverlay.png'} alt={'overlap'} width={510} height={25} priority
-                           className={'md:absolute relative md:w-[510px] w-[200px] md:-right-30 -right-50 md:top-35 -top-74 object-cover'}/>
+                           className={'md:absolute relative md:w-[510px] w-[180px] md:-right-30 -right-42 md:top-35 -top-58 object-cover'}/>
                 <Image src={'/deskframe.png'} alt={'frame'} width={180} height={100}
-                       className={'absolute right-[52%] md:w-[180px] w-[110px] bottom-74 md:bottom-42 md:right-[36%] object-cover'}/>
+                       className={'absolute right-[52%] md:w-[180px] w-[80px] bottom-60 md:bottom-42 md:right-[36%] object-cover'}/>
             </div>
         </div>
     );

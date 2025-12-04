@@ -32,7 +32,7 @@ const Plan = () => {
         <div className={'px-6 md:px-8 py-20'}>
             <div className={'max-w-7xl mx-auto'}>
                 <div className={'flex flex-col justify-center items-center w-full border-b border-[#1211271F] pb-10'}>
-                    <div className='font-bold text-4xl text-[#121127]'>User needs made visible.</div>
+                    <div className='font-bold text-4xl text-[#121127] mb-4'>User needs made visible.</div>
                     <span>Creativity is a highfalutin word for the work I have to do between now and Tuesday.</span>
                 </div>
                 <div className={'flex flex-col justify-center items-center w-full mt-10'}>

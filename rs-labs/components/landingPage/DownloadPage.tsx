@@ -8,9 +8,9 @@ const DownloadPage = () => {
     return(
         <div className={'px-6 md:px-8 pt-20'}>
             <div className={'relative md:flex md:flex-row justify-between flex-col gap-6 md:gap-12 max-w-7xl mx-auto md:h-[100vh] h-[95vh] overflow-hidden'}>
-                <div className={'mt-32'}>
+                <div className={'md:mt-32 mt-10'}>
                     <div className={'text-3xl text-[#000000] font-semibold mb-6'}>Download our app</div>
-                    <p className={'w-1/2 text-[#6F6F6F]'}>The best social investing experience.
+                    <p className={'w-full md:w-1/2 text-[#6F6F6F]'}>The best social investing experience.
                         Download the Royalsettle app
                         coming soon.</p>
                     <div className={'flex gap-4'}>
