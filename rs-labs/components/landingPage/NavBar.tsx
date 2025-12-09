@@ -6,7 +6,7 @@ import {Logo} from "@/components/reusables/Logo";
 import {Button} from "@/components/ui/button";
 
 const links = [
-    { name: "Products", path: "#home" },
+    { name: "Products", path: "#plan" },
     { name: "Features", path: "#features" },
     { name: "About us", path: "#about" },
     { name: "Contact us", path: "#contact" },
@@ -69,7 +69,7 @@ export const NavBar = () => {
         }
     };
     const goto=()=>{
-        window.location.href = "https://docs.google.com/forms/d/19wnSshwkE5H4jAdXcCMLRXpsV2RcLJ4QXmBL8RwEj1g";
+        window.location.href = "https://forms.gle/wATCDcjUrD5WPkf28";
     }
 
     return (

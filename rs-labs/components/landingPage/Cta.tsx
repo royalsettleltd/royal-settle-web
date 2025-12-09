@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Github } from "lucide-react"
 import Link from "next/link"
+import {MdContactMail} from "react-icons/md";
 
 const footerLinks = [
     { label: "About", href: "#about" },
@@ -35,23 +36,25 @@ export function Cta() {
                         <div className={'md:w-3/5 w-full'}>
                             <p className="text-xs font-semibold tracking-wider text-[#1E125C] uppercase mb-4">Contact Us</p>
                             <h3 className="text-2xl md:text-4xl font-bold text-[#121127] leading-tight md:mb-4 mb-2">
-                                You have a new project?
-                                or want to say hello...
+                                Let’s talk!
                             </h3>
+                            <p className="text-xs font-semibold tracking-wider text-[#1211278F] mb-4">Whether you're exploring thrift or ajo savings with RoyalSettle, planning a partnership, or need a team to build and launch your next digital product — our doors are open.
+                            </p>
                             <a href="mailto:info@email.com" className="text-xl md:text-4xl text-[#12112766] font-bold hover:underline">
-                                info@email.com
+                                Royalsettleltd@gmail.com
                             </a>
                         </div>
 
                         {/* Right side - Office addresses */}
-                        <div >
-                            <h4 className="font-bold text-[#121127] md:mb-4 mb-2">Offices</h4>
-                            <div className="space-y-4 text-sm text-muted-foreground">
-                                <div className={'md:w-3/5 w-full space-y-4 text-[#1211278F]'}>
-                                    <p>1901 Thornridge Cir. Shiloh, Hawaii 81063</p>
-                                    <p>8502 Preston Rd. Inglewood, Maine 98380</p>
-                                </div>
-                            </div>
+                        <div className={'flex justify-center items-center'}>
+                            {/*<h4 className="font-bold text-[#121127] md:mb-4 mb-2">Offices</h4>*/}
+                            {/*<div className="space-y-4 text-sm text-muted-foreground">*/}
+                            {/*    <div className={'md:w-3/5 w-full space-y-4 text-[#1211278F]'}>*/}
+                            {/*        <p>1901 Thornridge Cir. Shiloh, Hawaii 81063</p>*/}
+                            {/*        <p>8502 Preston Rd. Inglewood, Maine 98380</p>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
+                            <MdContactMail size={180}/>
                         </div>
                     </div>
                 </div>

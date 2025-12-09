@@ -3,7 +3,7 @@ import {Button} from "@/components/ui/button";
 
 export const Access = () => {
     const gotoAccess = () => {
-        window.location.href = 'https://docs.google.com/forms/d/19wnSshwkE5H4jAdXcCMLRXpsV2RcLJ4QXmBL8RwEj1g'
+        window.location.href = 'https://forms.gle/wATCDcjUrD5WPkf28'
     }
   return (
     <div className={'px-6 md:px-8 py-20 bg-[#F2F3FF]'}>
