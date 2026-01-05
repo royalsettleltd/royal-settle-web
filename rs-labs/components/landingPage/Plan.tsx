@@ -32,8 +32,8 @@ const Plan = () => {
         <div className={'px-6 md:px-8 py-20'}>
             <div className={'max-w-7xl mx-auto'}>
                 <div className={'flex flex-col justify-center items-center w-full border-b border-[#1211271F] pb-10'}>
-                    <div className='font-bold text-4xl text-[#121127] mb-4'>User needs made visible.</div>
-                    {/*<span>Creativity is a highfalutin word for the work I have to do between now and Tuesday.</span>*/}
+                    <div className='font-bold text-5xl text-[#101828] mb-4'>Our features</div>
+                    <span className={'text-[#101828] text-xl'}>We offer amazing features to help you save and reach your financial goals with ease.</span>
                 </div>
                 <div className={'flex flex-col justify-center items-center w-full mt-10'}>
                     <div className={'grid md:grid-cols-3 grid-cols-1 gap-6 mt-10'}>
