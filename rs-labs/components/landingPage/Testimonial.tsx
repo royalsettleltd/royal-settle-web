@@ -36,6 +36,13 @@ const testimonials = [
         title: "Frontend Engineer",
         image: "/img4.jpg",
     },
+    {
+        id: 5,
+        quote: "I experienced easy savings with Royalsettle",
+        name: "Olalekan-Ajadi Kehinde ",
+        title: "IT Officer",
+        image: "/img5.jpeg",
+    },
 ]
 
 export function Testimonial() {
@@ -43,7 +50,7 @@ export function Testimonial() {
 
 
     const handlePrevious = () => {
-        setActiveIndex((prev) => (prev === 0 ? testimonials.length - 1 : prev - 1))
+        setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
     }
 
     const handleNext = () => {
@@ -99,25 +106,27 @@ export function Testimonial() {
                             />
                         </div>
 
-                        <div className="hidden md:flex items-end justify-center gap-6 relative h-72 w-full">
+                        <div className="hidden md:block relative h-80 w-full">
                             {testimonials.map((testimonial, index) => {
-                                const isActive = index === activeIndex
-                                const offset = index - activeIndex
+                                const total = testimonials.length
+                                let offset = index - activeIndex
+                                if (offset > total / 2) offset -= total
+                                if (offset < -total / 2) offset += total
                                 const absOffset = Math.abs(offset)
-
+                                const isActive = offset === 0
                                 return (
                                     <div
                                         key={testimonial.id} // This is CRUCIAL for smooth remounting
                                         className={cn(
-                                            "relative transition-all duration-700 ease-out",
+                                            "absolute top-1/2 left-1/2 transition-all duration-700 ease-out",
                                             "rounded-2xl overflow-hidden shadow-lg",
-                                            "w-40 h-56 opacity-40 scale-90",
-                                            isActive && "w-56 h-72 scale-110 opacity-100 z-30 shadow-2xl",
-                                            absOffset === 1 && "opacity-70 scale-100 z-20",
-                                            absOffset >= 2 && "opacity-0 scale-75 z-10"
+                                            "w-44 h-60 opacity-60 scale-95",
+                                            isActive && "w-56 h-72 scale-105 opacity-100 z-30 shadow-2xl",
+                                            absOffset === 1 && "brightness-90 z-20",
+                                            absOffset >= 2 && "opacity-30 scale-90 z-10"
                                         )}
                                         style={{
-                                            transform: `translateX(${offset * 40}px) ${isActive ? 'translateY(-20px)' : 'translateY(0)'}`,
+                                            transform: ` translate(-50%, -50%) translateX(${offset * 160}px) ${isActive ? "translateY(-20px)" : ""}`,
                                         }}
                                     >
                                         <button

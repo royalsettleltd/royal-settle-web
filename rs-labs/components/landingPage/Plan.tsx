@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import {Card} from "@/components/ui/card";
 import {Button} from "@/components/ui/button";
@@ -28,6 +29,9 @@ const Plan = () => {
             btnText:'Coming soon'
         },
     ]
+    const goto = () => {
+        window.location.href = "https://docs.google.com/forms/d/19wnSshwkE5H4jAdXcCMLRXpsV2RcLJ4QXmBL8RwEj1g";
+    }
     return (
         <div className={'px-6 md:px-8 py-20'}>
             <div className={'max-w-7xl mx-auto'}>
@@ -48,7 +52,7 @@ const Plan = () => {
                                         <p className='text-sm text-[#1211278F] whitespace-pre-line mt-4'>{item.description}</p>
                                     </div>
                                     <div className='mt-6'>
-                                        <Button className={`px-4 py-2 w-full text-white ${item.btnText === 'Coming soon' ? 'bg-[#1E125C] cursor-not-allowed' : 'bg-[#1E125C] hover:bg-[#1e126c]'}`} disabled={item.btnText === 'Coming soon'}>
+                                        <Button className={`px-4 py-2 w-full text-white ${item.btnText === 'Coming soon' ? 'bg-[#1E125C] cursor-not-allowed' : 'bg-[#1E125C] hover:bg-[#1e126c] cursor-pointer'}`} disabled={item.btnText === 'Coming soon'} onClick={goto}>
                                             {item.btnText}
                                         </Button>
                                     </div>

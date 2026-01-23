@@ -10,14 +10,14 @@ const DownloadPage = () => {
             <div className={'relative md:flex md:flex-row justify-between flex-col gap-6 md:gap-12 max-w-7xl mx-auto md:h-[100vh] h-[95vh] overflow-hidden'}>
                 <div className={'md:mt-32 mt-10'}>
                     <div className={'text-3xl text-[#000000] font-semibold mb-6'}>Download our app</div>
-                    <p className={'w-full md:w-1/2 text-[#6F6F6F]'}>The best social investing experience.
-                        Download the Royalsettle app
-                        coming soon.</p>
+                    <p className={'w-full md:w-1/2 text-[#6F6F6F]'}>Get ready for the Royalsettle App!<br/>
+                        Your cooperative-style savings experience is moving to mobile soon.
+                    </p>
                     <div className={'flex gap-4'}>
-                        <Button variant='outline' className={'mt-6 bg-black text-[#FFFFFF] '}>
+                        <Button variant='outline' className={'mt-6 bg-black text-[#FFFFFF] disabled:bg-[#1E125C]'} disabled={true} >
                             <div className={'flex gap-2'}><span><Google/></span>Google Play</div>
                         </Button>
-                        <Button variant='outline' className={'mt-6 bg-[#FFF] text-[#000] border-[#E5E7EB]'}>
+                        <Button variant='outline' className={'mt-6 bg-[#FFF] text-[#000] border-[#E5E7EB] disabled:bg-[#1E125C] disabled:text-[#fff]'} disabled={true}>
                             <div className={'flex gap-2'}><span><Apple/></span>App Store</div>
                         </Button>
                     </div>

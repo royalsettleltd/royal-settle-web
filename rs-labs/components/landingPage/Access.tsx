@@ -12,7 +12,7 @@ export const Access = () => {
                 <div className={'text-4xl text-[#121127] font-bold mb-6'}>Ready to dive in?
                     Get early access today.</div>
                 <p>Be part of our early community and start building your thrift journey before the app launches.
-                    This also takes them to register with us and they can create thrifts before the app comes</p>
+                    This also takes you to register with us and you can create thrifts before the app comes</p>
                 <Button className={'bg-[#1E125C] text-[#fff] mt-5 cursor-pointer'} onClick={gotoAccess}>Get early Access</Button>
             </div>
             <div className={'relative md:left-30 left-0 mt-12'}>

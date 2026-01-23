@@ -40,7 +40,7 @@ export function Cta() {
                             </h3>
                             <p className="text-xs font-semibold tracking-wider text-[#1211278F] mb-4">Whether you're exploring thrift or ajo savings with RoyalSettle, planning a partnership, or need a team to build and launch your next digital product — our doors are open.
                             </p>
-                            <a href="mailto:info@email.com" className="text-xl md:text-4xl text-[#12112766] font-bold hover:underline">
+                            <a href="mailto:royalsettleltd@gmail.com" className="text-xl md:text-4xl text-[#12112766] font-bold hover:underline hover:text-[#1E125C] transition-colors">
                                 royalsettleltd@gmail.com
                             </a>
                         </div>
