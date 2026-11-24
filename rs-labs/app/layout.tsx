@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import {Poppins} from "next/font/google";
+import {Familjen_Grotesk, Mulish, Plus_Jakarta_Sans} from 'next/font/google';
 import "./globals.css";
 
-
-const poppins = Poppins({
-    variable: "--font-poppins",
+const familjenGrotesk = Familjen_Grotesk({
     subsets: ['latin'],
-    weight:["100","200","300","400","500","600","700","800"]
-})
+    weight: ['400', '500', '600', '700'],
+    style: ['normal', 'italic'],
+    variable: '--font-familjen',
+    display: 'swap',
+});
 
 
 
@@ -22,11 +23,14 @@ export default function RootLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <html lang="en">
-        <body className={`${poppins.variable} antialiased`}>
-            <div className={'mx-auto w-full overflow-hidden'}>
-                {children}
-            </div>
+        <html lang="en" className={`${familjenGrotesk.variable}`}>
+        <head>
+            <link href="https://cdnfonts.com" rel="stylesheet" />
+        </head>
+        <body>
+        <div className={'mx-auto w-full overflow-hidden'}>
+            {children}
+        </div>
         </body>
         </html>
     );

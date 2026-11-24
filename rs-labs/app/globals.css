@@ -1,10 +1,14 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@theme {
+    --font-sans: var(--font-familjen), sans-serif;
+    --font-nav: 'Gilroy-Bold', sans-serif;
+}
 
 body {
   margin: 0;
-  font-family: Poppins,serif;
+  font-family: var(--font-familjen), sans-serif;
   background-color: #fff;
   color:#201F23
 }

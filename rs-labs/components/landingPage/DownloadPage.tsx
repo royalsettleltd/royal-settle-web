@@ -1,32 +1,58 @@
 import Image from "next/image";
 import React from "react";
-import {Button} from "@/components/ui/button";
 import {Google} from "@/components/reusables/icons/Google";
 import {Apple} from "@/components/reusables/icons/Apple";
 
+const StoreBadge = ({icon, small, big}: { icon: React.ReactNode; small: string; big: string }) => (
+    <div
+        aria-disabled
+        className="flex items-center gap-2 rounded-lg border border-[#F0931B] bg-[#1A0233] px-3 py-1.5 text-white"
+    >
+        <span className="flex h-5 w-5 items-center justify-center [&>svg]:h-full [&>svg]:w-full">{icon}</span>
+        <span className="flex flex-col leading-none">
+            <span className="text-[9px] text-white/80">{small}</span>
+            <span className="mt-0.5 text-sm font-semibold">{big}</span>
+        </span>
+    </div>
+);
+
 const DownloadPage = () => {
-    return(
-        <div className={'px-6 md:px-8 pt-20'}>
-            <div className={'relative md:flex md:flex-row justify-between flex-col gap-6 md:gap-12 max-w-7xl mx-auto md:h-[100vh] h-[95vh] overflow-hidden'}>
-                <div className={'md:mt-32 mt-10'}>
-                    <div className={'text-3xl text-[#000000] font-semibold mb-6'}>Download our app</div>
-                    <p className={'w-full md:w-1/2 text-[#6F6F6F]'}>Get ready for the Royalsettle App!<br/>
-                        Your cooperative-style savings experience is moving to mobile soon.
+    return (
+        <section className="px-6 pt-16 md:px-8 md:pt-20">
+            <div className="relative mx-auto flex max-w-7xl flex-col overflow-hidden rounded-3xl bg-[#240046] shadow-xl md:h-[460px] md:flex-row md:items-center">
+                {/* Soft glow behind the phone */}
+                <div
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0"
+                    style={{background: 'radial-gradient(ellipse at 70% 50%, rgba(139,92,246,0.35), transparent 55%)'}}
+                />
+
+                {/* Copy */}
+                <div className="relative z-10 p-8 md:w-1/2 md:p-0 md:pl-16">
+                    <h2 className="mb-4 text-3xl font-semibold text-white md:text-4xl">Download our App</h2>
+                    <p className="mb-8 max-w-[380px] text-sm leading-relaxed text-[#E6DFF0] md:text-base">
+                        The best social investing experience. Download the Royalsettle Mobile Application.... coming soon.
                     </p>
-                    <div className={'flex gap-4'}>
-                        <Button variant='outline' className={'mt-6 bg-black text-[#FFFFFF] disabled:bg-[#1E125C]'} disabled={true} >
-                            <div className={'flex gap-2'}><span><Google/></span>Google Play</div>
-                        </Button>
-                        <Button variant='outline' className={'mt-6 bg-[#FFF] text-[#000] border-[#E5E7EB] disabled:bg-[#1E125C] disabled:text-[#fff]'} disabled={true}>
-                            <div className={'flex gap-2'}><span><Apple/></span>App Store</div>
-                        </Button>
+                    <div className="flex flex-wrap gap-3">
+                        <StoreBadge icon={<Apple/>} small="Download on the" big="App Store"/>
+                        <StoreBadge icon={<Google/>} small="GET IT ON" big="Google Play"/>
                     </div>
                 </div>
-                <div className={'absolute md:right-10 right-2'}>
-                    <Image src={'/img.png'} alt={'img'} width={522} height={23} className={'object-cover'} priority/>
+
+                {/* Phone: cropped at the bottom of the card */}
+                <div className="relative z-10 flex h-[300px] justify-center overflow-hidden px-6 md:absolute md:bottom-0 md:right-16 md:block md:h-[calc(100%-2rem)] md:overflow-visible md:px-0">
+                    <Image
+                        src="/content.png"
+                        alt="RoyalSettle app preview"
+                        width={522}
+                        height={640}
+                        className="h-auto w-[300px] object-contain object-bottom md:h-full md:w-auto"
+                        priority
+                    />
                 </div>
             </div>
-        </div>
-    )
-}
+        </section>
+    );
+};
+
 export default DownloadPage;

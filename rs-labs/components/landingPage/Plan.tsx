@@ -1,68 +1,122 @@
 'use client'
-import React from 'react';
-import {Card} from "@/components/ui/card";
-import {Button} from "@/components/ui/button";
+import React, {useState, useEffect, useRef} from 'react';
+import Image from "next/image";
+import {motion} from 'framer-motion';
+
+const tabs = [
+    {
+        title: 'Ajo',
+        description:
+            'Save together, grow together. Bring your trusted circle online, contribute with ease, and enjoy transparent, stress-free payouts every round.',
+    },
+    {
+        title: 'Thrift plan',
+        description:
+            'Create thrift in one second. Fast, secure, and seamless thrift creation - save at your own pace and watch your money grow effortlessly.',
+    },
+    {
+        title: 'Loan',
+        description: 'Coming soon...',
+    },
+];
 
 const Plan = () => {
-    const  details=[
-        {
-            icon:'/thrift-icon.png',
-            title:'Thrift',
-            description:'Create thrift in one second.\n' +
-                'Fast, secure, and seamless thrift creation — save at ' +
-                'your own pace and watch your money grow effortlessly.',
-            btnText:'Get started'
-        },
-        {
-            icon:'/esusu-icon.png',
-            title:'Ajo - Esusu',
-            description:'Save together, grow together.\n' +
-                'Bring your trusted circle online, contribute ' +
-                'with ease, and enjoy transparent, stress-free payouts every round.',
-            btnText:'Get started'
-        },
-        {
-            icon:'/loan-icon.png',
-            title:'Loan',
-            description:'Users build financial credibility by saving regularly.\n' +
-                'After an eligibility period, they can request loans based on their savings history.',
-            btnText:'Coming soon'
-        },
-    ]
-    const goto = () => {
-        window.location.href = "https://docs.google.com/forms/d/19wnSshwkE5H4jAdXcCMLRXpsV2RcLJ4QXmBL8RwEj1g";
-    }
+    const [active, setActive] = useState(0);
+    const sectionRef = useRef<HTMLElement>(null);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        setActive(0);
+                    }
+                });
+            },
+            { threshold: 0.3 }
+        );
+
+        if (sectionRef.current) {
+            observer.observe(sectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className={'px-6 md:px-8 py-20'}>
-            <div className={'max-w-7xl mx-auto'}>
-                <div className={'flex flex-col justify-center items-center w-full border-b border-[#1211271F] pb-10'}>
-                    <div className='font-bold text-5xl text-[#101828] mb-4'>Our features</div>
-                    <span className={'text-[#101828] text-xl'}>We offer amazing features to help you save and reach your financial goals with ease.</span>
+        <section ref={sectionRef} className="px-6 py-16 md:px-8 md:py-20">
+            <div className="mx-auto max-w-7xl">
+                {/* Heading */}
+                <div className="flex w-full flex-col items-center pb-10 text-center">
+                    <span className="mb-4 rounded-full bg-[#F1EBFF] px-3 py-1 text-xs font-medium text-[#5B3FD0]">
+                        Features
+                    </span>
+                    <h2 className="mb-4 text-4xl font-bold text-[#101828] md:text-5xl">Our features</h2>
+                    <p className="max-w-xl text-sm text-[#101828] md:text-base">
+                        We offer amazing features to help you save and reach your financial goals with ease.
+                    </p>
                 </div>
-                <div className={'flex flex-col justify-center items-center w-full mt-10'}>
-                    <div className={'grid md:grid-cols-3 grid-cols-1 gap-6 mt-10'}>
-                            {details.map((item, index)=>(
-                                <Card key={index} className={'p-6 md:w-[300px] w-full flex flex-col justify-between border-[#12112714] shadow-none transition-all duration-300 ease-out\n' +
-                                    '    hover:shadow-lg hover:-translate-y-1 hover:scale-[1.02]'}>
-                                    <div>
-                                        <div className='w-12 h-12 mb-4'>
-                                            <img src={item.icon} alt={item.title} className='w-full h-full object-contain'/>
-                                        </div>
-                                        <div className='font-bold text-[#121127]'>{item.title}</div>
-                                        <p className='text-sm text-[#1211278F] whitespace-pre-line mt-4'>{item.description}</p>
-                                    </div>
-                                    <div className='mt-6'>
-                                        <Button className={`px-4 py-2 w-full text-white ${item.btnText === 'Coming soon' ? 'bg-[#1E125C] cursor-not-allowed' : 'bg-[#1E125C] hover:bg-[#1e126c] cursor-pointer'}`} disabled={item.btnText === 'Coming soon'} onClick={goto}>
-                                            {item.btnText}
-                                        </Button>
-                                    </div>
-                                </Card>
-                            ))}
-                    </div>
+
+                {/* App preview, fading out at the bottom */}
+                <div className="flex w-full justify-center">
+                    <Image
+                        src="/feature.png"
+                        width={600}
+                        height={512}
+                        alt="RoyalSettle app screens"
+                        className="h-auto w-full max-w-[600px]"
+                        style={{
+                            maskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)',
+                            WebkitMaskImage: 'linear-gradient(to bottom, black 75%, transparent 100%)',
+                        }}
+                    />
+                </div>
+
+                {/* Tabs */}
+                <div
+                    role="tablist"
+                    aria-label="Features"
+                    className="mx-auto mt-10 grid max-w-4xl grid-cols-1 md:grid-cols-3"
+                >
+                    {tabs.map((tab, index) => {
+                        const isActive = index === active;
+                        return (
+                            <button
+                                key={tab.title}
+                                role="tab"
+                                type="button"
+                                aria-selected={isActive}
+                                onClick={() => setActive(index)}
+                                className="relative flex flex-col  items-center justify-start border-t-2 border-[#E4E7EC] px-6 pb-4 pt-6 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F29F05]"
+                            >
+                                {/* Yellow bar that slides between tabs */}
+                                {isActive && (
+                                    <motion.div
+                                        layoutId="feature-active-bar"
+                                        className="absolute -top-0.5 left-0 right-0 h-0.5 bg-[#F29F05]"
+                                        transition={{type: 'spring', stiffness: 400, damping: 35}}
+                                    />
+                                )}
+                                <div
+                                    className={`mb-3 text-xl font-semibold transition-colors ${
+                                        isActive ? 'text-[#101828]' : 'text-[#475467]'
+                                    }`}
+                                >
+                                    {tab.title}
+                                </div>
+                                <p
+                                    className={`mx-auto max-w-[260px] text-base leading-relaxed transition-colors ${
+                                        isActive ? 'text-[#475467]' : 'text-[#667085]'
+                                    }`}
+                                >
+                                    {tab.description}
+                                </p>
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
-
-        </div>
+        </section>
     );
 };
 

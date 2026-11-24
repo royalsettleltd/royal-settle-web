@@ -1,92 +1,80 @@
-import { Facebook, Twitter, Instagram, Github } from "lucide-react"
-import Link from "next/link"
-import {MdContactMail} from "react-icons/md";
+import React from "react";
 
-const footerLinks = [
-    { label: "About", href: "#about" },
-    { label: "Blog", href: "#" },
-    { label: "Jobs", href: "#" },
-    { label: "Press", href: "#" },
-    { label: "Accessibility", href: "#" },
-    { label: "Partners", href: "#" },
-]
+const PHONE_DISPLAY = "+234 803 072 3213";
+const PHONE_TEL = "+2348030723213";
+const EMAIL = "royalsettleltd@gmail.com";
 
-const socialLinks = [
-    { icon: Facebook, href: "#", label: "Facebook" },
-    { icon: Twitter, href: "#", label: "Twitter" },
-    { icon: Instagram, href: "#", label: "Instagram" },
-    { icon: Github, href: "#", label: "GitHub" },
-]
+const contacts = [
+    {
+        icon: "/face.png",
+        title: "Send us a mail",
+        description: "Speak to our friendly team.",
+        label: EMAIL,
+        href: `mailto:${EMAIL}`,
+        underline: true,
+    },
+    {
+        icon: "/chat.png",
+        title: "Chat to support",
+        description: "We're here to help.",
+        label: PHONE_DISPLAY,
+        href: `https://wa.me/${PHONE_TEL.replace("+", "")}`,
+        underline: false,
+    },
+    {
+        icon: "/call.png",
+        title: "Call us",
+        description: "Mon-Fri from 8am to 5pm.",
+        label: PHONE_DISPLAY,
+        href: `tel:${PHONE_TEL}`,
+        underline: false,
+    },
+];
 
-
-export function Cta() {
+const Cta = () => {
     return (
-        <footer className="mt-20">
-            <div className="relative py-16 mb-44 px-4 md:px-8 md:h-[200px] h-[150px]"
-                 style={{
-                backgroundImage: `url('/footerBg.png')`,
-                backgroundSize: "cover",
-            }}
-            >
-
-                {/* Contact Card */}
-                <div className="relative max-w-4xl mx-auto">
-                    <div className="md:mt-8 -mt-2 bg-[#fff] rounded-xl shadow-xl p-8 md:p-10 flex flex-col md:flex-row justify-between md:gap-8 gap-4">
-                        {/* Left side - Contact info */}
-                        <div className={'md:w-3/5 w-full'}>
-                            <p className="text-xs font-semibold tracking-wider text-[#1E125C] uppercase mb-4">Contact Us</p>
-                            <h3 className="text-2xl md:text-4xl font-bold text-[#121127] leading-tight md:mb-4 mb-2">
-                                Let’s talk!
-                            </h3>
-                            <p className="text-xs font-semibold tracking-wider text-[#1211278F] mb-4">Whether you're exploring thrift or ajo savings with RoyalSettle, planning a partnership, or need a team to build and launch your next digital product — our doors are open.
-                            </p>
-                            <a href="mailto:royalsettleltd@gmail.com" className="text-xl md:text-4xl text-[#12112766] font-bold hover:underline hover:text-[#1E125C] transition-colors">
-                                royalsettleltd@gmail.com
-                            </a>
-                        </div>
-
-                        {/* Right side - Office addresses */}
-                        <div className={'flex justify-center items-center'}>
-                            <MdContactMail size={180}/>
-                        </div>
-                    </div>
+        <section id="contact" className="bg-white px-6 py-16 md:px-8 md:py-24">
+            <div className="mx-auto max-w-7xl">
+                {/* Heading */}
+                <div className="mb-12 flex flex-col items-center text-center md:mb-16">
+                    <span className="mb-4 rounded-full bg-[#F1EBFF] px-3 py-1 text-xs font-medium text-[#5B3FD0]">
+                        Contact us
+                    </span>
+                    <h2 className="mb-4 text-3xl font-bold tracking-tight text-[#101828] md:text-5xl">
+                        We&apos;d love to hear from you
+                    </h2>
+                    <p className="text-sm text-[#475467] md:text-base">
+                        Our friendly team is always here to chat.
+                    </p>
                 </div>
-            </div>
 
-            {/* Footer links and social */}
-            <div className="bg-[#FFF] md:py-14 pt-32 pb-8 px-4">
-                <div className="max-w-4xl mx-auto text-center">
-                    {/* Navigation links */}
-                    <nav className="flex flex-wrap justify-center gap-x-8 gap-y-3 mb-8">
-                        {footerLinks.map((link) => (
-                            <Link
-                                key={link.label}
-                                href={link.href}
-                                className="text-sm text-[#1211278F] hover:text-[#1E125C] transition-colors"
-                            >
-                                {link.label}
-                            </Link>
-                        ))}
-                    </nav>
-
-                    {/* Social icons */}
-                    <div className="flex justify-center gap-6 mb-8">
-                        {socialLinks.map((social) => (
+                {/* Cards */}
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                    {contacts.map(({icon, title, description, label, href, underline}) => (
+                        <div
+                            key={title}
+                            className="flex flex-col items-center bg-[#F9FAFB] px-6 pb-8 pt-8 text-center"
+                        >
+                            <span className="mb-12 flex h-9 w-9 items-center justify-center rounded-lg bg-[#240046] text-white">
+                                <img src={icon} alt={title} className="h-[28px] w-[28px]"/>
+                            </span>
+                            <h3 className="mb-2 text-base font-semibold text-[#101828]">{title}</h3>
+                            <p className="mb-5 text-xs text-[#475467]">{description}</p>
                             <a
-                                key={social.label}
-                                href={social.href}
-                                aria-label={social.label}
-                                className="text-muted-foreground hover:text-[#1E125C] transition-colors"
+                                href={href}
+                                {...(href.startsWith("http") ? {target: "_blank", rel: "noopener noreferrer"} : {})}
+                                className={`text-xs font-semibold text-[#240046] hover:opacity-80 ${
+                                    underline ? "underline underline-offset-2" : ""
+                                }`}
                             >
-                                <social.icon className="w-5 h-5" />
+                                {label}
                             </a>
-                        ))}
-                    </div>
-
-                    {/* Copyright */}
-                    <p className="text-sm text-[#1211278F]">© {new Date().getFullYear()} royalsettle. All rights reserved</p>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </footer>
-    )
-}
+        </section>
+    );
+};
+
+export default Cta;

@@ -1,13 +1,13 @@
 "use client"
 
-import { useState } from "react"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { cn } from "@/lib/utils"
+import React, {useState} from "react"
+import Image from "next/image"
+import {ArrowLeft, ArrowRight, Star} from "lucide-react"
+
 const testimonials = [
     {
         id: 1,
-        quote:
-            "Royalsettle helped me stay disciplined with my savings and reach my goal faster.",
+        quote: "Royalsettle helped me stay disciplined with my savings and reach my goal faster.",
         name: "Ajadi Israel",
         title: "Corper",
         image: "/img1.jpg",
@@ -30,8 +30,7 @@ const testimonials = [
     },
     {
         id: 4,
-        quote:
-            "With Royalsettle, my savings has been well secured and am at ease with it.",
+        quote: "With Royalsettle, my savings has been well secured and am at ease with it.",
         name: "Nwaezeigwe-eze Omolara",
         title: "Frontend Engineer",
         image: "/img4.jpg",
@@ -39,120 +38,117 @@ const testimonials = [
     {
         id: 5,
         quote: "I experienced easy savings with Royalsettle",
-        name: "Olalekan-Ajadi Kehinde ",
+        name: "Olalekan-Ajadi Kehinde",
         title: "IT Officer",
         image: "/img5.jpeg",
     },
 ]
 
+const CARD_W = 205
+const GAP = 20
+const PITCH = CARD_W + GAP
+
 export function Testimonial() {
-    const [activeIndex, setActiveIndex] = useState(0)
+    const n = testimonials.length
 
+    // Three copies of the list so the carousel can loop in both directions.
+    // We always rest in the middle copy and silently jump back after an animation.
+    const items = [...testimonials, ...testimonials, ...testimonials]
+    const [pos, setPos] = useState(n)
+    const [animate, setAnimate] = useState(true)
 
-    const handlePrevious = () => {
-        setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    const go = (direction: 1 | -1) => {
+        setAnimate(true)
+        setPos((p) => p + direction)
     }
 
-    const handleNext = () => {
-        setActiveIndex((prev) => (prev + 1) % testimonials.length)
+    const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
+        // Ignore hover transitions bubbling up from the cards
+        if (e.target !== e.currentTarget || e.propertyName !== "transform") return
+        if (pos >= 2 * n || pos < n) {
+            setAnimate(false)
+            setPos((p) => (p >= 2 * n ? p - n : p + n))
+        }
     }
 
     return (
-        <section className="w-full py-16 md:py-24 bg-background">
-            <div className="container max-w-7xl mx-auto px-4">
-                <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
+        <section className="w-full overflow-hidden bg-white py-16 md:py-24">
+            <div className="mx-auto max-w-7xl px-6 md:px-8">
+                {/* Heading */}
+                <div className="mb-12 flex flex-col items-center text-center">
+                    <span className="mb-4 rounded-full bg-[#F1EBFF] px-3 py-1 text-xs font-medium text-[#5B3FD0]">
+                        Testimonials
+                    </span>
+                    <h2 className="mb-3 text-3xl font-bold text-[#101828] md:text-4xl">
+                        Don&apos;t just take our word for it
+                    </h2>
+                    <p className="text-sm text-[#344054] md:text-base">
+                        Hear from some of our amazing customers who are enjoying their growth.
+                    </p>
+                </div>
 
-                    <div className="flex-1 max-w-md">
-                        <blockquote className="text-[#7F7F7F] text-lg leading-relaxed mb-6">
-                            "{testimonials[activeIndex].quote}"
-                        </blockquote>
-                        <div className="mb-6">
-                            <h3 className="text-xl font-bold text-foreground">{testimonials[activeIndex].name}</h3>
-                            <p className="text-muted-foreground">{testimonials[activeIndex].title}</p>
-                        </div>
-                        {/* Pagination dots */}
-                        <div className="flex gap-2">
-                            {testimonials.map((_, index) => (
-                                <button
-                                    key={index}
-                                    onClick={() => setActiveIndex(index)}
-                                    className={cn(
-                                        "h-0.5 rounded-full transition-all duration-300",
-                                        index === activeIndex ? "w-8 bg-[#1e3a5f]" : "w-4 bg-[#C4C4C4]",
-                                    )}
-                                    aria-label={`Go to testimonial ${index + 1}`}
+                {/* Track: clipped on the left at the container edge, bleeds off to the right */}
+                <div style={{clipPath: "inset(0 -100vw 0 0)"}}>
+                    <div
+                        onTransitionEnd={handleTransitionEnd}
+                        className={`flex ${
+                            animate ? "transition-transform duration-500 ease-out motion-reduce:transition-none" : ""
+                        }`}
+                        style={{gap: GAP, transform: `translateX(-${pos * PITCH}px)`}}
+                    >
+                        {items.map((t, i) => (
+                            <div
+                                key={`${t.id}-${i}`}
+                                tabIndex={0}
+                                className="group relative h-[275px] shrink-0 overflow-hidden bg-[#E4E7EC] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3FD0]"
+                                style={{width: CARD_W}}
+                            >
+                                <Image
+                                    src={t.image || "/Avatar.svg"}
+                                    alt={t.name}
+                                    fill
+                                    sizes={`${CARD_W}px`}
+                                    className="object-cover"
                                 />
-                            ))}
-                        </div>
-                    </div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent"/>
 
-
-                    <div className="flex-1 relative flex items-center justify-center">
-
-
-                        <button
-                            onClick={handlePrevious}
-                            className="absolute left-0 md:-left-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background shadow-lg flex items-center justify-center hover:bg-muted transition"
-                        >
-                            <ChevronLeft className="w-5 h-5 text-[#898A8D]" />
-                        </button>
-
-
-                        <div className="flex md:hidden items-center justify-center w-full">
-                            <img
-                                src={testimonials[activeIndex].image || "/Avatar.svg"}
-                                alt={testimonials[activeIndex].name}
-                                className="w-48 h-48 object-cover rounded-2xl shadow-lg"
-                            />
-                        </div>
-
-                        <div className="hidden md:block relative h-80 w-full">
-                            {testimonials.map((testimonial, index) => {
-                                const total = testimonials.length
-                                let offset = index - activeIndex
-                                if (offset > total / 2) offset -= total
-                                if (offset < -total / 2) offset += total
-                                const absOffset = Math.abs(offset)
-                                const isActive = offset === 0
-                                return (
-                                    <div
-                                        key={testimonial.id} // This is CRUCIAL for smooth remounting
-                                        className={cn(
-                                            "absolute top-1/2 left-1/2 transition-all duration-700 ease-out",
-                                            "rounded-2xl overflow-hidden shadow-lg",
-                                            "w-44 h-60 opacity-60 scale-95",
-                                            isActive && "w-56 h-72 scale-105 opacity-100 z-30 shadow-2xl",
-                                            absOffset === 1 && "brightness-90 z-20",
-                                            absOffset >= 2 && "opacity-30 scale-90 z-10"
-                                        )}
-                                        style={{
-                                            transform: ` translate(-50%, -50%) translateX(${offset * 160}px) ${isActive ? "translateY(-20px)" : ""}`,
-                                        }}
-                                    >
-                                        <button
-                                            onClick={() => setActiveIndex(index)}
-                                            className="w-full h-full"
-                                        >
-                                            <img
-                                                src={testimonial.image || "/Avatar.svg"}
-                                                alt={testimonial.name}
-                                                className="w-full h-full object-cover pointer-events-none"
-                                            />
-                                        </button>
+                                {/* Frosted glass panel */}
+                                <div className="absolute inset-x-3.5 bottom-3.5 bg-white/25 p-3.5 text-white backdrop-blur-md">
+                                    {/* Quote: always visible on mobile, revealed on hover/focus on desktop */}
+                                    <div className="overflow-hidden text-sm leading-snug transition-all duration-300 md:max-h-0 md:opacity-0 md:group-hover:mb-3 md:group-hover:max-h-40 md:group-hover:opacity-100 md:group-focus:mb-3 md:group-focus:max-h-40 md:group-focus:opacity-100 max-md:mb-3">
+                                        &ldquo;{t.quote}&rdquo;
                                     </div>
-                                )
-                            })}
-                        </div>
-
-                        <button
-                            onClick={handleNext}
-                            className="absolute right-0 md:-right-8 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full bg-background shadow-lg flex items-center justify-center hover:bg-muted transition"
-                        >
-                            <ChevronRight className="w-5 h-5 text-[#898A8D]" />
-                        </button>
-
+                                    <div className="mb-2 flex gap-0.5">
+                                        {Array.from({length: 5}).map((_, s) => (
+                                            <Star key={s} className="h-3.5 w-3.5 fill-white text-white"/>
+                                        ))}
+                                    </div>
+                                    <div className="text-lg font-medium leading-tight">{t.name}</div>
+                                    <div className="mt-1 text-xs">{t.title}</div>
+                                </div>
+                            </div>
+                        ))}
                     </div>
+                </div>
 
+                {/* Arrows */}
+                <div className="mt-6 flex gap-3">
+                    <button
+                        type="button"
+                        onClick={() => go(-1)}
+                        aria-label="Previous testimonial"
+                        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#E4E7EC] bg-white text-[#2A0A59] transition hover:bg-[#F9F5FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3FD0]"
+                    >
+                        <ArrowLeft className="h-4 w-4"/>
+                    </button>
+                    <button
+                        type="button"
+                        onClick={() => go(1)}
+                        aria-label="Next testimonial"
+                        className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full border border-[#E4E7EC] bg-white text-[#2A0A59] transition hover:bg-[#F9F5FF] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#5B3FD0]"
+                    >
+                        <ArrowRight className="h-4 w-4"/>
+                    </button>
                 </div>
             </div>
         </section>

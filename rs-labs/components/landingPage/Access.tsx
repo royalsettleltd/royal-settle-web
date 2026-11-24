@@ -1,24 +1,42 @@
 'use client';
 import {Button} from "@/components/ui/button";
 
+const SIGNUP_URL = 'https://forms.gle/wATCDcjUrD5WPkf28';
+const LOGIN_URL = '/login'; // TODO: point this at your real login route
+
 export const Access = () => {
-    const gotoAccess = () => {
-        window.location.href = 'https://forms.gle/wATCDcjUrD5WPkf28'
-    }
-  return (
-    <div className={'px-6 md:px-8 py-20 bg-[#F2F3FF]'}>
-        <div className={'relative flex md:flex-row justify-between flex-col gap-6 md:gap-12 max-w-7xl mx-auto'}>
-            <div className={'md:mt-32 mt-20 md:w-1/2 w-full'}>
-                <div className={'text-4xl text-[#121127] font-bold mb-6'}>Ready to dive in?
-                    Get early access today.</div>
-                <p>Be part of our early community and start building your thrift journey before the app launches.
-                    This also takes you to register with us and you can create thrifts before the app comes</p>
-                <Button className={'bg-[#1E125C] text-[#fff] mt-5 cursor-pointer'} onClick={gotoAccess}>Get early Access</Button>
+    const goto = (url: string) => {
+        window.location.href = url;
+    };
+
+    return (
+        <section className="bg-white px-6 py-12 md:px-8 md:py-20">
+            <div className="mx-auto flex max-w-7xl flex-col justify-between gap-6 rounded-2xl bg-[#F8F9FB] px-6 py-8 md:flex-row md:items-center md:px-10 md:py-10">
+                <div>
+                    <h2 className="mb-3 text-3xl font-semibold text-[#101828]">
+                        Get early access today
+                    </h2>
+                    <p className="text-xl text-[#475467]">
+                        Join over 4,000+ communities already growing with Royalsettle.
+                    </p>
+                </div>
+
+                <div className="flex shrink-0 items-center gap-3">
+                    <Button
+                        variant="outline"
+                        className="cursor-pointer border-[#D0D5DD] bg-white px-4 text-base font-semibold text-[#755F90] hover:bg-[#F9FAFB]"
+                        onClick={() => goto(LOGIN_URL)}
+                    >
+                        Log in
+                    </Button>
+                    <Button
+                        className="cursor-pointer bg-[#240046] px-4 text-base font-semibold text-white hover:bg-[#2F0460]"
+                        onClick={() => goto(SIGNUP_URL)}
+                    >
+                        Create an Account
+                    </Button>
+                </div>
             </div>
-            <div className={'relative md:left-30 left-0 mt-12'}>
-                <img src={'/access.png'} alt={'access'} width={822} height={23} className={'object-cover'} />
-            </div>
-        </div>
-    </div>
-  )
-}
+        </section>
+    );
+};

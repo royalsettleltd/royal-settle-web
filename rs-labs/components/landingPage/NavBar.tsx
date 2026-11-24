@@ -2,13 +2,13 @@
 import { useState, useEffect } from "react";
 import {X} from "lucide-react";
 import {LuMenu} from "react-icons/lu";
-import {Logo} from "@/components/reusables/Logo";
 import {Button} from "@/components/ui/button";
 
 const links = [
-    { name: "Products", path: "#plan" },
-    { name: "Features", path: "#features" },
-    { name: "About us", path: "#about" },
+    {name:'Home',path:'#home'},
+    { name: "Our features", path: "#features" },
+    { name: "Testimonials", path: "#testimonial" },
+    { name: "FAQs", path: "#faq" },
     { name: "Contact us", path: "#contact" },
 ];
 
@@ -77,8 +77,9 @@ export const NavBar = () => {
         >
             <div className="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
                 {/* Logo */}
-                <div>
-                    <img src={'/coyLogo.png'} alt={'logo'}/>
+                <div className={'flex items-center gap-2'}>
+                    <img src={'/Logomark.png'} alt={'logo'}/>
+                    <span className={'font-semibold text-xl text-[#27153E]'}>Royalsettle</span>
                 </div>
 
                 <nav className="hidden md:flex gap-8 items-center">
@@ -99,7 +100,8 @@ export const NavBar = () => {
                 </nav>
 
                 <div className={'gap-2 md:flex hidden'}>
-                    <Button variant={'outline'} className={'border-[#1211271F] cursor-pointer hover:text-[#1E125C]'} onClick={goto}>Get Access</Button>
+                    <Button variant={'outline'} className={'border-[#1211271F] cursor-pointer font-semibold text-base hover:text-[#1E125C]'} onClick={goto}>Login</Button>
+                    <Button variant={'outline'} className={'border-[#1211271F] bg-[#240046] text-white tex-base font-semibold cursor-pointer'} onClick={goto}>Sign up</Button>
                 </div>
 
                 <button
