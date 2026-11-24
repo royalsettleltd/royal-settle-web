@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import {Familjen_Grotesk, Mulish, Plus_Jakarta_Sans} from 'next/font/google';
+import {Familjen_Grotesk} from 'next/font/google';
 import "./globals.css";
 
 const familjenGrotesk = Familjen_Grotesk({
